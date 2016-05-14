@@ -30,12 +30,12 @@ Hints on dependecy locations for application can be found in the header.html fil
 Bootstrap and Bootstrap-touchspin css-files in the top part of header-file.
 JQuery, Bootstrap and Bootstrap-touchspin javascript files in the botton part of header-file.
 
-DEPENDECIES
+DEPENDENCIES
 
-Drango framework
+Django framework
 
 Bootstrap framework
 
-JQuery 2-2.3
+JQuery 2-2.3 library
 
-Bootstrap-touchspin
+Bootstrap-touchspin library
