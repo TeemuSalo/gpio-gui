@@ -1,0 +1,61 @@
+#!/bin/sh
+# Start/stop the django server
+#
+### BEGIN INIT INFO
+# Provides:          django server
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Django server for web browsing
+# Description:       autostart django for gpio gui usage
+### END INIT INFO
+
+
+NAME=django-server
+DAEMON=django/server
+
+PIDFILE=/var/run/django-server.pid
+SCRIPTNAME=/etc/init.d/"$NAME"
+
+PYTHON_PATH="/usr/bin/python"
+
+MANAGE_PATH="/home/pi/GPIO/manage.py"
+
+case "$1" in
+start)  echo "starting django server"
+	# Start server in background, send output to /dev/null
+	# Echo out process ID and store in PID variable
+	PID=`$PYTHON_PATH $MANAGE_PATH runserver 0.0.0.0:8000 > /dev/null 2>&1 & echo $!`
+	if [ -z $PID ];then # if PID is empty
+	   printf "%s\n" "Fail"
+	else
+	   echo $PID > $PIDFILE # store into PIDFILE path
+	   printf "%s\n" "Ok"
+	fi
+	;;
+
+stop)	printf "%-50s" "Stopping $NAME"
+        PID=`cat $PIDFILE`
+        if [ -f $PIDFILE ]; then
+	   # starting process will create a child process
+	   # for the server, kill child process first
+
+	   # get and kill child process
+           kill -HUP `pgrep -P $PID`
+	   # kill parent process also
+	   kill -HUP $PID
+           printf "%s\n" "Ok"
+           rm -f $PIDFILE
+	else
+	   printf "%s\n" "pidfile not found"
+	fi
+        ;;
+
+status) exit 1
+	;;
+
+*)      exit 2
+        ;;
+esac
+exit 0
