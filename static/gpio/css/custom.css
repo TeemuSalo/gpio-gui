@@ -28,6 +28,10 @@ span.glyphicon-remove {
 	background-color:transparent;
 }
 
+.added-pin-row option{
+	background-color: #339933;
+}
+
 #PinCreator button{
 	min-width: 8em;
 }

@@ -29,4 +29,5 @@ urlpatterns = [
 
 	# MAKE GPIO COMMANDS
 	url(r'^ajax/$', views.ajax, name='ajax'),
+]
 	

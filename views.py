@@ -91,6 +91,7 @@ def loadedRun(request, primarykey):
 	retrieved_run = SavedRuns.objects.get(pk=primarykey)
 	ArrInArr = []
 	retrieved_run_split = retrieved_run.pins.split()
+
 	for index in range(len(retrieved_run_split)):
 		ArrInArr.append(retrieved_run_split[index].split(','))
 
@@ -116,7 +117,7 @@ def deleteRun(request, primarykey):
 		current.created = current.created.strftime("%H:%M %d/%m/%Y");
 
 	# Redirect user to main page
-	return redirect('/gpio/')
+	return redirect('index')
 
 
 
