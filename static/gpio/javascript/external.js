@@ -244,7 +244,7 @@ function parseDataToForm(){
 
 		data += " ";
 
-		everything += data; // "13,0,primary,0 "
+		everything += data; // "13,0,info,0 "
 
 
 	});
