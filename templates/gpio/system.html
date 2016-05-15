@@ -95,6 +95,7 @@
 			<div id="row-{{ forloop.counter }}" class="row added-pin-row">
 			<div class="col-sm-1"><span class="glyphicon glyphicon-remove pull-left remove-line" aria-hidden="true"></span></div>
 			<div class="col-sm-11 label label-success">
+
 			<select class="select pull-left">
 				{% for i in pins_range %}
 				<option pin_val="{{ forloop.counter }}" {% if forloop.counter|stringformat:"i" == c.0 %} selected {% endif %}>

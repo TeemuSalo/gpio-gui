@@ -6,14 +6,13 @@ import json
 
 
 
-_RPI_MODE_ = False;
-
+_RPI_MODE_ = True;
 #
 #	Raspberry Pi mode can be turned of 
 #	if testing is done elsewhere
 #
-
 if( _RPI_MODE_ ):
+
 	import RPi.GPIO as GPIO
 	#GPIO.setmode(GPIO.BOARD)
 
@@ -23,8 +22,6 @@ if( _RPI_MODE_ ):
 # Get range for all usable pins
 pins_range = [3,5,7,8,10,11,12,13,15,16,18,19,21,22,23,24,26,29,31,32,33,35,36,37,38,40]
 
-
-
 # DEFAULT
 def index(request):
 
@@ -32,7 +29,7 @@ def index(request):
 	# Django shares all template folders
 	# return html file inside application folder
 
-
+	# Get range for all pins
 	# Get all objects for loading options
 	all_objects = SavedRuns.objects.all()
 
@@ -56,9 +53,9 @@ def savePins(request):
 		add_pins.save()
 		
 		sequel = request.POST['pins'].split(); 
+
 		# ['13,1,danger,Pin-HIGH'] 
 		# OLD FORM ['1,warning,0,primary,Pin-LOW']
-
 	
 		ArrInArr = []
 
@@ -66,7 +63,6 @@ def savePins(request):
 			ArrInArr.append(sequel[index].split(',')) 
 			# [ ['13', '1', 'danger', 'Pin-HIGH'] ] 
 			# OLD FORM [ ['1', 'warning', '0', 'primary', 'Pin-LOW'] ]
-
 	else:
 		ArrInArr = []
 	
@@ -104,9 +100,7 @@ def loadedRun(request, primarykey):
 # DELETE RUN
 def deleteRun(request, primarykey):
 
-
 	# All pins range
-
 
 	SavedRuns.objects.get(pk=primarykey).delete()
 
@@ -117,8 +111,8 @@ def deleteRun(request, primarykey):
 		current.created = current.created.strftime("%H:%M %d/%m/%Y");
 
 	# Redirect user to main page
-	return redirect('index')
 
+	return redirect('index')
 
 
 
@@ -216,11 +210,5 @@ def ajax(request):
 			json.dumps({"result": "something went wrong"}),
 			content_type="application/json"
 		)
-
-
-
-
-
-
 
 

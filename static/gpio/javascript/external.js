@@ -222,8 +222,8 @@ function parseDataToForm(){
 		//var pin_color = returned_setup['type']; // success, primary, warning, danger
 
 
-
 		/* concatenate into data one row */
+
 		var data = returned_setup['value']; // 1 - 40
 
 		data += ",";
