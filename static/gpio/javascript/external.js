@@ -219,18 +219,18 @@ function parseDataToForm(){
 
 		var returned_setup = setup_pin( pin );
 
-		var pin_color = returned_setup['type']; // success, primary, warning, danger
-
+		//var pin_color = returned_setup['type']; // success, primary, warning, danger
 
 
 		/* concatenate into data one row */
-		var data = returned_setup['value']; // 1 - 26
+
+		var data = returned_setup['value']; // 1 - 40
 
 		data += ",";
-
-		data += pin_color; // success, primary, warning, danger
-
-		data += ",";
+	
+		// Pin color always success now
+		//data += pin_color; // success, primary, warning, danger
+		//data += ",";
 
 		var pin_state = $(this).find("button").val();
 
@@ -244,7 +244,8 @@ function parseDataToForm(){
 
 		data += " ";
 
-		everything += data; // "13,warning,0,primary,0 "
+		everything += data; // "13,0,info,0 "
+
 
 	});
 
