@@ -1,0 +1,66 @@
+html { 
+  overflow-y: scroll; 
+}
+
+h2 {
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+.label{
+text-align:left;
+}
+
+span.glyphicon-remove {
+    font-size: 2.2em;
+	margin: 0.1em 0.3em 0 0;
+}
+
+.added-pin-row{
+	margin: 0.1em 0 0.1em 0;
+}
+
+.added-pin-row .btn{
+	width: 20%;
+}
+.added-pin-row select{
+	width: 75%;
+	font-size:2em;
+	background-color:transparent;
+}
+
+.added-pin-row option{
+	background-color: #339933;
+}
+
+#PinCreator button{
+	min-width: 8em;
+}
+
+.startrun{
+	min-width: 8em;
+}
+
+#info-box{
+	height: 60%;
+	position:fixed;
+	right: 2.3em;
+	top: 19.5em;
+	z-index: -1;
+}
+
+#rel-select{
+	position:relative;
+}
+#abs-select-label{
+	position:absolute;
+	top: -1.2em;
+}
+
+#delay{
+	min-width:5em;
+}
+
+
+#savedRuns{
+	margin-left: 15px;
+}
