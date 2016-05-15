@@ -12,12 +12,17 @@ _RPI_MODE_ = False;
 #	Raspberry Pi mode can be turned of 
 #	if testing is done elsewhere
 #
-if(_RPI_MODE_):
+if( _RPI_MODE_ ):
 	import RPi.GPIO as GPIO
-	GPIO.setmode(GPIO.BOARD)
+	#GPIO.setmode(GPIO.BOARD)
 
 	# Turn on/off warnings
-	GPIO.setwarnings(False)
+	#GPIO.setwarnings(False)
+
+# Get range for all usable pins
+pins_range = [3,5,7,8,10,11,12,13,15,16,18,19,21,22,23,24,26,29,31,32,33,35,36,37,38,40]
+
+
 
 
 # DEFAULT
@@ -26,9 +31,6 @@ def index(request):
 	# render looks for folder 'templates'
 	# Django shares all template folders
 	# return html file inside application folder
-
-	# Get range for all pins
-	pins_range = range(26)
 
 	# Get all objects for loading options
 	all_objects = SavedRuns.objects.all()
@@ -53,13 +55,15 @@ def savePins(request):
 		add_pins.save()
 		
 		sequel = request.POST['pins'].split(); 
-		# ['13,success,1,danger,Pin-HIGH', '1,warning,0,primary,Pin-LOW']
+		# ['13,1,danger,Pin-HIGH'] 
+		# OLD FORM ['1,warning,0,primary,Pin-LOW']
 	
 		ArrInArr = []
 
 		for index in range(len(sequel)):
 			ArrInArr.append(sequel[index].split(',')) 
-			# [ ['13', 'success', '1', 'danger', 'Pin-HIGH'], ['1', 'warning', '0', 'primary', 'Pin-LOW'] ]
+			# [ ['13', '1', 'danger', 'Pin-HIGH'] ] 
+			# OLD FORM [ ['1', 'warning', '0', 'primary', 'Pin-LOW'] ]
 	else:
 		ArrInArr = []
 	
@@ -71,7 +75,7 @@ def savePins(request):
 def loadedRun(request, primarykey):
 
 	# All pins range
-	pins_range = range(26)
+
 
 	# Load run options
 	all_objects = SavedRuns.objects.all()
@@ -88,12 +92,13 @@ def loadedRun(request, primarykey):
 		ArrInArr.append(retrieved_run_split[index].split(','))
 
 	# Render page with requested run
-	return render(request, 'gpio/system.html', {"saves":all_objects, 'pins':ArrInArr, 'loadedRun': retrieved_run, "pins_range":pins_range} )
+	return render(request, 'gpio/system.html', {"saves":all_objects, 'pins':ArrInArr, 
+					'loadedRun': retrieved_run, "pins_range":pins_range} )
 
 # DELETE RUN
 def deleteRun(request, primarykey):
 
-	pins_range = range(26)
+	# All pins range
 
 	SavedRuns.objects.get(pk=primarykey).delete()
 
@@ -104,7 +109,7 @@ def deleteRun(request, primarykey):
 		current.created = current.created.strftime("%H:%M %d/%m/%Y");
 
 	# Redirect user to main page
-	return redirect('/gpio/')
+	return redirect('/')
 
 
 
@@ -130,10 +135,14 @@ def ajax(request):
 		# RASPBERRY PI
 		if ( _RPI_MODE_ and run_round == "first" ):
 			
-			for i in range(1,27):
+			# set mode here, why does global not work?
+			GPIO.setmode(GPIO.BOARD)
+
+			for i in pins_range:
 				# Setup all pins as output
 				GPIO.setup(i, GPIO.OUT)
-				response_data["first"] = "First round, all pins set to output<br/><br/>"
+
+			response_data["first"] = "First round, all pins set to output<br/><br/>"
 
 		# DEVELOPMENT
 		elif ( run_round == "first" ):
@@ -149,9 +158,11 @@ def ajax(request):
 
 		# RASPBERRY PI
 		if (_RPI_MODE_):
-			
+			#GPIO.setmode(GPIO.BOARD)
 			pin_direction = GPIO.HIGH if pin_dir_received == 1 else GPIO.LOW
-			GPIO.output( pin_received, pin_direction)
+			GPIO.output( pin_received, pin_direction )
+			response_data['pin_nro'] = pin_received
+			response_data['pin_direction'] = pin_dir_received
 
 		# DEVELOPMENT
 		else:
@@ -179,7 +190,6 @@ def ajax(request):
 				
 				print('GPIO cleanup')
 				response_data["clean"] = "<br/>Pins cleaned afted last round<br/>"
-
 
 
 
