@@ -10,6 +10,7 @@ function setup_pin( el_clicked )
 
 	var el_value = parseInt( el_clicked.attr('pin_val') );
 
+<<<<<<< HEAD
 		switch( el_value ) {
     		case 1:
 				var setup = {'type':'warning', 'text':'Pin 1 - 3.3V', 'value':'1'};
@@ -94,6 +95,11 @@ function setup_pin( el_clicked )
 		}
 	
 		return setup;
+=======
+	var setup = {'type':'success', 'text':'Pin ' + String(el_value), 'value':String(el_value)};
+	
+	return setup;
+>>>>>>> gpio-origin/master
 
 }
 

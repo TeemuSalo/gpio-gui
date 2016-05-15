@@ -219,11 +219,16 @@ function parseDataToForm(){
 
 		var returned_setup = setup_pin( pin );
 
+<<<<<<< HEAD
 		var pin_color = returned_setup['type']; // success, primary, warning, danger
+=======
+		//var pin_color = returned_setup['type']; // success, primary, warning, danger
+>>>>>>> gpio-origin/master
 
 
 
 		/* concatenate into data one row */
+<<<<<<< HEAD
 		var data = returned_setup['value']; // 1 - 26
 
 		data += ",";
@@ -231,6 +236,15 @@ function parseDataToForm(){
 		data += pin_color; // success, primary, warning, danger
 
 		data += ",";
+=======
+		var data = returned_setup['value']; // 1 - 40
+
+		data += ",";
+	
+		// Pin color always success now
+		//data += pin_color; // success, primary, warning, danger
+		//data += ",";
+>>>>>>> gpio-origin/master
 
 		var pin_state = $(this).find("button").val();
 
@@ -244,7 +258,11 @@ function parseDataToForm(){
 
 		data += " ";
 
+<<<<<<< HEAD
 		everything += data; // "13,warning,0,primary,0 "
+=======
+		everything += data; // "13,0,primary,0 "
+>>>>>>> gpio-origin/master
 
 	});
 
