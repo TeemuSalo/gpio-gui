@@ -6,7 +6,7 @@ import json
 
 
 
-_RPI_MODE_ = True;
+_RPI_MODE_ = False;
 #
 #	Raspberry Pi mode can be turned of 
 #	if testing is done elsewhere

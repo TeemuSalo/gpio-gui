@@ -45,7 +45,7 @@ function create_line(pinSetup) {
 
 	$(".PinLinesContainer").append("<div pin_val=' "+pinValue+" ' class='row added-pin-row '>\
 		<div class='col-sm-1'><span class='glyphicon glyphicon-remove pull-left remove-line' aria-hidden='true'></span></div>\
-		<div class='col-sm-11 label label-success" '>\
+		<div class='col-sm-11 label label-success '>\
 		"+select_html+"\
 		<button type='button' class='btn btn-info pull-right Pin-Dir' value='0'>Pin-LOW</button></div></div>");
 }
