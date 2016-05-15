@@ -1,6 +1,0 @@
-# exclude all compiled py files
-*.pyc
-# exclude third party libraries, JQuery bootstrap etc
-static/gpio/mainsite
-# exclude migrations, user must create herself
-migrations
